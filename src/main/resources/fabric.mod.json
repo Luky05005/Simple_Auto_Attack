@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "simple_auto_attack",
+  "version": "${version}",
+  "name": "Simple Auto Attack",
+  "description": "Makes holding the attack button attack entities automatically",
+  "authors": ["Luky005"],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/simple-auto-attack",
+    "sources": "https://github.com/Luky05005/Simple_Auto_Attack",
+    "issues": "https://github.com/Luky05005/Simple_Auto_Attack/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "org.simpleautoattack.SimpleAutoAttack.AutoAttack"
+    ],
+    "modmenu": [
+      "org.simpleautoattack.SimpleAutoAttack.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "AutoAttack.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "cloth-config": "*"
+  },
+  "recommends": {
+    "modmenu": "*"
+  }
+}
