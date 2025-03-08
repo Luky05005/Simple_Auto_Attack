@@ -1,12 +1,12 @@
 {
-  "text.autoconfig.simple_auto_attack.title": "Simple Auto Attack Config",
+  "text.autoconfig.simple_auto_attack.title": "Simple Auto Attack",
   "text.autoconfig.simple_auto_attack.option.enabled": "Enabled",
   "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[0]": "Enables/disables the mod",
   "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[1]": "When disabled, the mod won't do anything",
   
   "text.autoconfig.simple_auto_attack.option.alwaysAttack": "Always Attack",
-  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip[0]": "Attacks even when not looking at anything",
-  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip[1]": "Useful for hitting invisible entities",
+  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip[0]": "Attacks even when not looking at entities",
+  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip[1]": "Hit air",
   
   "text.autoconfig.simple_auto_attack.option.preventBlockBreaking": "Prevent Block Breaking",
   "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.@Tooltip[0]": "Prevents breaking blocks when holding weapons",

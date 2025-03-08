@@ -25,10 +25,15 @@
     "AutoAttack.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.15.10",
+    "minecraft": [
+      "=1.21.1",
+      "=1.21.2",
+      "=1.21.3",
+      "=1.21.4"
+    ],
     "fabric": "*",
-    "minecraft": "${minecraft_version}",
-    "cloth-config": "*"
+    "cloth-config": ">=15.0.140"
   },
   "recommends": {
     "modmenu": "*"
