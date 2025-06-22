@@ -4,12 +4,17 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.text.Text;
+import org.lwjgl.glfw.GLFW;
 import org.simpleautoattack.SimpleAutoAttack.config.AutoAttackConfig;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileUtil;
 
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -21,6 +26,8 @@ import net.minecraft.util.math.Vec3d;
 
 public class AutoAttack implements ClientModInitializer {
     private static AutoAttackConfig config;
+    private static KeyBinding toggleKeyBinding;
+    private static KeyBinding togglePreventBlockBreakingKeyBinding;
 
     @Override
     public void onInitializeClient() {
@@ -28,8 +35,40 @@ public class AutoAttack implements ClientModInitializer {
         AutoConfig.register(AutoAttackConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(AutoAttackConfig.class).getConfig();
 
-        
+        // Register keybinding
+        toggleKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.simple_auto_attack.toggle",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_COMMA,
+            "key.categories.simple_auto_attack"
+        ));
+        togglePreventBlockBreakingKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.simple_auto_attack.prevent_block_breaking",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_PERIOD,
+            "key.categories.simple_auto_attack"
+        ));
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (toggleKeyBinding.wasPressed() && client.player != null && client.currentScreen == null) {
+                config.enabled = !config.enabled;
+                AutoConfig.getConfigHolder(AutoAttackConfig.class).save();
+                if (config.toggleNotification) {
+                    String msgKey = config.enabled ? "simple_auto_attack.actionbar.on" : "simple_auto_attack.actionbar.off";
+                    client.player.sendMessage(Text.translatable(msgKey), true);
+                }
+            }
+            if (togglePreventBlockBreakingKeyBinding.wasPressed() && client.player != null && client.currentScreen == null) {
+                config.preventBlockBreaking.enabled = !config.preventBlockBreaking.enabled;
+                AutoConfig.getConfigHolder(AutoAttackConfig.class).save();
+                if (config.toggleNotification) {
+                    String msgKey = config.preventBlockBreaking.enabled
+                            ? "simple_auto_attack.actionbar.blockbreaking.on"
+                            : "simple_auto_attack.actionbar.blockbreaking.off";
+
+                    client.player.sendMessage(Text.translatable(msgKey), true);
+                }
+            }
             if (config.enabled) {  // Only run if enabled in config
                 AutoMeleeTick(client);
             }

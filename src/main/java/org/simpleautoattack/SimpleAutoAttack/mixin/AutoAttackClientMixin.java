@@ -30,12 +30,28 @@ public abstract class AutoAttackClientMixin {
         AutoAttackConfig config = AutoConfig.getConfigHolder(AutoAttackConfig.class).getConfig();
         
         // Only prevent block breaking if the config option is enabled
-        if (config.preventBlockBreaking && isBreakPressed && player != null) {
+        if (config.preventBlockBreaking.enabled && isBreakPressed && player != null) {
             ItemStack mainHandItem = player.getInventory().getMainHandStack();
             String itemName = mainHandItem.getItem().toString().toLowerCase();
 
-            // Use item tag for swords, string check for tridents
-            if (mainHandItem.isIn(ItemTags.SWORDS) || itemName.contains("trident") || itemName.contains("mace")) {
+            boolean shouldPrevent = false;
+            if (mainHandItem.isIn(ItemTags.SWORDS) && config.preventBlockBreaking.sword) {
+                shouldPrevent = true;
+            } else if (itemName.contains("trident") && config.preventBlockBreaking.trident) {
+                shouldPrevent = true;
+            } else if (itemName.contains("mace") && config.preventBlockBreaking.mace) {
+                shouldPrevent = true;
+            } else if (mainHandItem.isIn(ItemTags.AXES) && config.preventBlockBreaking.axe) {
+                shouldPrevent = true;
+            } else if (mainHandItem.isIn(ItemTags.PICKAXES) && config.preventBlockBreaking.pickaxe) {
+                shouldPrevent = true;
+            } else if (mainHandItem.isIn(ItemTags.SHOVELS) && config.preventBlockBreaking.shovel) {
+                shouldPrevent = true;
+            } else if (mainHandItem.isIn(ItemTags.HOES) && config.preventBlockBreaking.hoe) {
+                shouldPrevent = true;
+            }
+
+            if (shouldPrevent) {
                 interactionManager.cancelBlockBreaking();
                 info.cancel();
             }

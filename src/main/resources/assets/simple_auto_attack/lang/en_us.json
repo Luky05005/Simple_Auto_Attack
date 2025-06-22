@@ -1,14 +1,38 @@
 {
   "text.autoconfig.simple_auto_attack.title": "Simple Auto Attack",
+
   "text.autoconfig.simple_auto_attack.option.enabled": "Enabled",
   "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[0]": "Enables/disables the mod",
-  "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[1]": "When disabled, the mod won't do anything",
-  
+  "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[1]": "Toggle with hotkey, default is comma",
+
   "text.autoconfig.simple_auto_attack.option.alwaysAttack": "Always Attack",
-  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip[0]": "Attacks even when not looking at entities",
-  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip[1]": "Hit air",
-  
+  "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip": "Attacks even when not looking at entities",
+
+  "text.autoconfig.simple_auto_attack.option.toggleNotification": "Toggle Notification",
+  "text.autoconfig.simple_auto_attack.option.toggleNotification.@Tooltip[0]": "Show action bar message when toggling",
+  "text.autoconfig.simple_auto_attack.option.toggleNotification.@Tooltip[1]": "Displays On/Off in the action bar when using the hotkey",
+
   "text.autoconfig.simple_auto_attack.option.preventBlockBreaking": "Prevent Block Breaking",
-  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.@Tooltip[0]": "Prevents breaking blocks when holding weapons",
-  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.@Tooltip[1]": "Works with swords, tridents, and maces"
+
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.enabled": "Enabled",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.enabled.@Tooltip[0]": "Prevents breaking block with the selected items",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.enabled.@Tooltip[1]": "Toggle with hotkey, default is dot",
+
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.sword": "Sword",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.trident": "Trident",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.mace": "Mace",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.axe": "Axe",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.pickaxe": "Pickaxe",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.shovel": "Shovel",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.hoe": "Hoe",
+
+  "simple_auto_attack.actionbar.on": "Auto Attack: §aOn",
+  "simple_auto_attack.actionbar.off": "Auto Attack: §cOff",
+  "simple_auto_attack.actionbar.blockbreaking.on": "Prevent Block Breaking: §aOn",
+  "simple_auto_attack.actionbar.blockbreaking.off": "Prevent Block Breaking: §cOff",
+
+
+  "key.categories.simple_auto_attack": "Simple Auto Attack",
+  "key.simple_auto_attack.toggle": "Toggle Auto Attack",
+  "key.simple_auto_attack.prevent_block_breaking": "Toggle Block Breaking"
 }
