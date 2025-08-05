@@ -17,10 +17,12 @@ Makes the combat similar to the combat snapshots and adds some QOL features.
 - **Attack through grass**
 - **No attack resetting** doens't hit grass or blocks, which makes cave combat easier
 - **Prevent block breaking** (with swords, tridents and the mace), prevents attack resetting
+
+Configureable with [ModMenu](https://modrinth.com/mod/modmenu)
   
 ## Usage
 
-1. Install [Fabric](https://fabricmc.net/use/) and [Fabric API](https://modrinth.com/mod/fabric-api).
+1. Install [Fabric](https://fabricmc.net/use/) and [Fabric API](https://modrinth.com/mod/fabric-api) and [Cloth config API](https://modrinth.com/mod/cloth-config).
 2. Download this mod and place it in your Minecraft mods folder.
 3. Launch Minecraft and enjoy!
 
