@@ -42,5 +42,8 @@ public class AutoAttackConfig implements ConfigData {
 
         @ConfigEntry.Gui.NoTooltip
         public boolean hoe = false;
+
+        @ConfigEntry.Gui.NoTooltip
+        public boolean spear = false;
     }
 }

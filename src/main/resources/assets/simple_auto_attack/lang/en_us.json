@@ -25,6 +25,7 @@
   "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.pickaxe": "Pickaxe",
   "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.shovel": "Shovel",
   "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.hoe": "Hoe",
+  "text.autoconfig.simple_auto_attack.option.preventBlockBreaking.spear": "Spear",
 
   "simple_auto_attack.actionbar.on": "Auto Attack: §aOn",
   "simple_auto_attack.actionbar.off": "Auto Attack: §cOff",

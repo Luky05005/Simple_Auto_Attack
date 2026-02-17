@@ -31,7 +31,8 @@ public abstract class AutoAttackClientMixin {
         
         // Only prevent block breaking if the config option is enabled
         if (config.preventBlockBreaking.enabled && isBreakPressed && player != null) {
-            ItemStack mainHandItem = player.getInventory().getMainHandStack();
+            // ItemStack mainHandItem = player.getInventory().getMainHandStack();
+            ItemStack mainHandItem = player.getMainHandStack();
             String itemName = mainHandItem.getItem().toString().toLowerCase();
 
             boolean shouldPrevent = false;
@@ -48,6 +49,8 @@ public abstract class AutoAttackClientMixin {
             } else if (mainHandItem.isIn(ItemTags.SHOVELS) && config.preventBlockBreaking.shovel) {
                 shouldPrevent = true;
             } else if (mainHandItem.isIn(ItemTags.HOES) && config.preventBlockBreaking.hoe) {
+                shouldPrevent = true;
+            } else if (mainHandItem.isIn(ItemTags.SPEARS) && config.preventBlockBreaking.spear) {
                 shouldPrevent = true;
             }
 

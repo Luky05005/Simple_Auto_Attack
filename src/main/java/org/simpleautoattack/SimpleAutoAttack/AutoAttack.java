@@ -23,6 +23,7 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Identifier;
 
 public class AutoAttack implements ClientModInitializer {
     private static AutoAttackConfig config;
@@ -34,19 +35,23 @@ public class AutoAttack implements ClientModInitializer {
         // Register config
         AutoConfig.register(AutoAttackConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(AutoAttackConfig.class).getConfig();
+       
+        final KeyBinding.Category CATEGORY =
+        KeyBinding.Category.create(Identifier.of("simple_auto_attack", "main"));
 
-        // Register keybinding
+        // Register keybinding 
         toggleKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.simple_auto_attack.toggle",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_COMMA,
-            "key.categories.simple_auto_attack"
+            CATEGORY
         ));
+
         togglePreventBlockBreakingKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.simple_auto_attack.prevent_block_breaking",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_PERIOD,
-            "key.categories.simple_auto_attack"
+            CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -88,7 +93,7 @@ public class AutoAttack implements ClientModInitializer {
 
         if (mc.crosshairTarget.getType() == HitResult.Type.MISS) {
             if (config.alwaysAttack) {
-                mc.player.resetLastAttackedTicks();
+                // mc.player.resetLastAttackedTicks();
                 mc.player.swingHand(Hand.MAIN_HAND);
             }
         } else if (mc.crosshairTarget.getType() == HitResult.Type.BLOCK) {
