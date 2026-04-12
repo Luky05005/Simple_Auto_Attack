@@ -31,7 +31,7 @@ public abstract class AutoAttackClientMixin {
         
         // Only prevent block breaking if the config option is enabled
         if (config.preventBlockBreaking.enabled && isBreakPressed && player != null) {
-            ItemStack mainHandItem = player.getInventory().getMainHandStack();
+            ItemStack mainHandItem = player.getMainHandStack();
             String itemName = mainHandItem.getItem().toString().toLowerCase();
 
             boolean shouldPrevent = false;

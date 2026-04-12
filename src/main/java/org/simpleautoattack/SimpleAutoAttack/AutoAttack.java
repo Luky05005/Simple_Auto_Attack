@@ -11,6 +11,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import org.simpleautoattack.SimpleAutoAttack.config.AutoAttackConfig;
 
@@ -35,18 +36,22 @@ public class AutoAttack implements ClientModInitializer {
         AutoConfig.register(AutoAttackConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(AutoAttackConfig.class).getConfig();
 
+        final KeyBinding.Category CATEGORY =
+                KeyBinding.Category.create(Identifier.of("simple_auto_attack", "main"));
+
         // Register keybinding
         toggleKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.simple_auto_attack.toggle",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_COMMA,
-            "key.categories.simple_auto_attack"
+                "key.simple_auto_attack.toggle",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_COMMA,
+                CATEGORY
         ));
+
         togglePreventBlockBreakingKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.simple_auto_attack.prevent_block_breaking",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_PERIOD,
-            "key.categories.simple_auto_attack"
+                "key.simple_auto_attack.prevent_block_breaking",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_PERIOD,
+                CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
