@@ -118,6 +118,7 @@ public class AutoAttack implements ClientModInitializer {
             if (entity.isAlive() && entity.isAttackable()) {
                 mc.interactionManager.attackEntity(mc.player, entity);
                 mc.player.swingHand(Hand.MAIN_HAND);
+
             }
         }
     }
