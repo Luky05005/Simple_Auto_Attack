@@ -102,8 +102,8 @@ public class AutoAttack implements ClientModInitializer {
                 // mc.player.resetLastAttackedTicks();
                 if (spear != null) {
                     mc.interactionManager.attackWithPiercingWeapon(spear);
-                    mc.player.swingHand(Hand.MAIN_HAND);
                 }
+                mc.player.swingHand(Hand.MAIN_HAND);
             }
         } else if (mc.crosshairTarget.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHit = (BlockHitResult) mc.crosshairTarget;
