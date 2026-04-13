@@ -9,6 +9,12 @@ public class AutoAttackConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean enabled = true;
 
+    @ConfigEntry.Gui.Tooltip(count = 2)
+    public boolean preventFirstAttack = true;
+
+    @ConfigEntry.Gui.Tooltip
+    public boolean ignoreMaceCooldown = true;
+
     @ConfigEntry.Gui.Tooltip
     public boolean alwaysAttack = false;
 
