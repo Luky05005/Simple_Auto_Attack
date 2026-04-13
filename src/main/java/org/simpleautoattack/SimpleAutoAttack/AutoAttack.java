@@ -120,24 +120,30 @@ public class AutoAttack implements ClientModInitializer {
                         e -> !e.isSpectator() && e.isAttackable(), reach * reach);
                 if (result != null && result.getEntity().isAlive()) {
                     // Spear exclusive attack
-                    if (spear != null && PiercingWeapon.canHitEntity(mc.player, result.getEntity())) {
-                        mc.gameMode.piercingAttack(spear);
+                    if (spear != null) {
+                        if (PiercingWeapon.canHitEntity(mc.player, result.getEntity())) {
+                            mc.gameMode.piercingAttack(spear);
+                            mc.player.swing(InteractionHand.MAIN_HAND);
+                        }
                     } else {
                         mc.gameMode.attack(mc.player, result.getEntity());
+                        mc.player.swing(InteractionHand.MAIN_HAND);
                     }
-                    mc.player.swing(InteractionHand.MAIN_HAND);
                 }
             }
         } else if (mc.hitResult.getType() == HitResult.Type.ENTITY) {
             Entity entity = ((EntityHitResult) mc.hitResult).getEntity();
             if (entity.isAlive() && entity.isAttackable()) {
                 // Spear exclusive attack
-                if (spear != null && PiercingWeapon.canHitEntity(mc.player, entity)) {
-                    mc.gameMode.piercingAttack(spear);
+                if (spear != null) {
+                    if (PiercingWeapon.canHitEntity(mc.player, entity)) {
+                        mc.gameMode.piercingAttack(spear);
+                        mc.player.swing(InteractionHand.MAIN_HAND);
+                    }
                 } else {
                     mc.gameMode.attack(mc.player, entity);
+                    mc.player.swing(InteractionHand.MAIN_HAND);
                 }
-                mc.player.swing(InteractionHand.MAIN_HAND);
             }
         }
     }
