@@ -8,8 +8,11 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PiercingWeaponComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.simpleautoattack.SimpleAutoAttack.config.AutoAttackConfig;
@@ -91,10 +94,16 @@ public class AutoAttack implements ClientModInitializer {
             return;
         }
 
+        ItemStack mainHandItem = mc.player.getMainHandStack();
+        PiercingWeaponComponent spear = mainHandItem.get(DataComponentTypes.PIERCING_WEAPON);
+
         if (mc.crosshairTarget.getType() == HitResult.Type.MISS) {
             if (config.alwaysAttack) {
                 // mc.player.resetLastAttackedTicks();
-                mc.player.swingHand(Hand.MAIN_HAND);
+                if (spear != null) {
+                    mc.interactionManager.attackWithPiercingWeapon(spear);
+                    mc.player.swingHand(Hand.MAIN_HAND);
+                }
             }
         } else if (mc.crosshairTarget.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHit = (BlockHitResult) mc.crosshairTarget;
@@ -102,23 +111,38 @@ public class AutoAttack implements ClientModInitializer {
             BlockState blockState = mc.world.getBlockState(blockPos);
 
             if (blockState.getCollisionShape(mc.world, blockPos).isEmpty() || blockState.getHardness(mc.world, blockPos) == 0.0F) {
-                float reach = (float) (mc.player.isInCreativeMode() ? 4.5 : 3.0);
+                float reach = (float) (mc.player.getAttackRange().maxRange());
                 Vec3d camera = mc.player.getCameraPosVec(1.0F);
                 Vec3d rotation = mc.player.getRotationVec(1.0F);
                 Vec3d end = camera.add(rotation.x * reach, rotation.y * reach, rotation.z * reach);
                 EntityHitResult result = ProjectileUtil.raycast(mc.player, camera, end, new Box(camera, end),
                         e -> !e.isSpectator() && e.isAttackable(), reach * reach);
                 if (result != null && result.getEntity().isAlive()) {
-                    mc.interactionManager.attackEntity(mc.player, result.getEntity());
-                    mc.player.swingHand(Hand.MAIN_HAND);
+                    // Spear exclusive attack
+                    if (spear != null) {
+                        if (PiercingWeaponComponent.canHit(mc.player, result.getEntity())) {
+                            mc.interactionManager.attackWithPiercingWeapon(spear);
+                            mc.player.swingHand(Hand.MAIN_HAND);
+                        }
+                    } else {
+                        mc.interactionManager.attackEntity(mc.player, result.getEntity());
+                        mc.player.swingHand(Hand.MAIN_HAND);
+                    }
                 }
             }
         } else if (mc.crosshairTarget.getType() == HitResult.Type.ENTITY) {
             Entity entity = ((EntityHitResult) mc.crosshairTarget).getEntity();
             if (entity.isAlive() && entity.isAttackable()) {
-                mc.interactionManager.attackEntity(mc.player, entity);
-                mc.player.swingHand(Hand.MAIN_HAND);
-
+                // Spear exclusive attack
+                if (spear != null) {
+                    if (PiercingWeaponComponent.canHit(mc.player, entity)) {
+                        mc.interactionManager.attackWithPiercingWeapon(spear);
+                        mc.player.swingHand(Hand.MAIN_HAND);
+                    }
+                } else {
+                    mc.interactionManager.attackEntity(mc.player, entity);
+                    mc.player.swingHand(Hand.MAIN_HAND);
+                }
             }
         }
     }
