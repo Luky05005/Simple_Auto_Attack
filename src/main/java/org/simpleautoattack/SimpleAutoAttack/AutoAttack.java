@@ -90,12 +90,21 @@ public class AutoAttack implements ClientModInitializer {
     }
 
     private void AutoMeleeTick(Minecraft mc) {
-        if (!mc.options.keyAttack.isDown() || mc.player == null || mc.level == null || mc.gameMode == null
-                || !(mc.player.getAttackStrengthScale(0) >= 1)) {
+        if (!mc.options.keyAttack.isDown()
+                || mc.player == null
+                || mc.level == null
+                || mc.gameMode == null) {
             return;
         }
 
         ItemStack mainHandItem = mc.player.getMainHandItem();
+
+        // Mace Ignore cooldown
+        boolean ignoreCooldown = getConfig().ignoreMaceCooldown && mainHandItem.getItem().toString().toLowerCase().contains("mace");
+        if (!ignoreCooldown && mc.player.getAttackStrengthScale(0) < 1) {
+            return;
+        }
+
         PiercingWeapon spear = mainHandItem.get(DataComponents.PIERCING_WEAPON);
 
         if (mc.hitResult.getType() == HitResult.Type.MISS) {

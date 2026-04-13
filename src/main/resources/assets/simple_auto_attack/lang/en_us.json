@@ -5,6 +5,13 @@
   "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[0]": "Enables/disables the mod",
   "text.autoconfig.simple_auto_attack.option.enabled.@Tooltip[1]": "Toggle with hotkey, default is comma",
 
+  "text.autoconfig.simple_auto_attack.option.preventFirstAttack": "Prevent First Attack",
+  "text.autoconfig.simple_auto_attack.option.preventFirstAttack.@Tooltip[0]": "Stops the attack to preserve attack cooldown for a guaranteed hit",
+  "text.autoconfig.simple_auto_attack.option.preventFirstAttack.@Tooltip[1]": "Affects only items enabled in Prevent Block Breaking section",
+
+  "text.autoconfig.simple_auto_attack.option.ignoreMaceCooldown": "Ignore Mace Cooldown",
+  "text.autoconfig.simple_auto_attack.option.ignoreMaceCooldown.@Tooltip": "Attack with mace even if cooldown isn't ready",
+
   "text.autoconfig.simple_auto_attack.option.alwaysAttack": "Always Attack",
   "text.autoconfig.simple_auto_attack.option.alwaysAttack.@Tooltip": "Attacks even when not looking at entities",
 
