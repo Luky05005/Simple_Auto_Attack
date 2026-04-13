@@ -10,6 +10,10 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.item.ItemFrameItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.MaceItem;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.simpleautoattack.SimpleAutoAttack.config.AutoAttackConfig;
@@ -81,8 +85,18 @@ public class AutoAttack implements ClientModInitializer {
     }
 
     private void AutoMeleeTick(MinecraftClient mc) {
-        if (!mc.options.attackKey.isPressed() || mc.player == null || mc.world == null || mc.interactionManager == null
-                || !(mc.player.getAttackCooldownProgress(0) >= 1)) {
+        if (!mc.options.attackKey.isPressed()
+                || mc.player == null
+                || mc.world == null
+                || mc.interactionManager == null) {
+            return;
+        }
+
+        ItemStack mainHandItem = mc.player.getMainHandStack();
+
+        // Mace Ignore cooldown
+        boolean ignoreCooldown = getConfig().ignoreMaceCooldown && mainHandItem.getItem().toString().toLowerCase().contains("mace");
+        if (!ignoreCooldown && mc.player.getAttackCooldownProgress(0) < 1) {
             return;
         }
 
