@@ -59,7 +59,7 @@ public class AutoAttack implements ClientModInitializer {
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (toggleKeyBinding.consumeClick() && client.player != null && client.screen == null) {
+            if (toggleKeyBinding.consumeClick() && client.player != null && client.gui.screen() == null) {
                 config.enabled = !config.enabled;
                 AutoConfig.getConfigHolder(AutoAttackConfig.class).save();
                 if (config.toggleNotification) {
@@ -67,7 +67,7 @@ public class AutoAttack implements ClientModInitializer {
                     client.player.sendOverlayMessage(Component.translatable(msgKey));
                 }
             }
-            if (togglePreventBlockBreakingKeyBinding.consumeClick() && client.player != null && client.screen == null) {
+            if (togglePreventBlockBreakingKeyBinding.consumeClick() && client.player != null && client.gui.screen() == null) {
                 config.preventBlockBreaking.enabled = !config.preventBlockBreaking.enabled;
                 AutoConfig.getConfigHolder(AutoAttackConfig.class).save();
                 if (config.toggleNotification) {
